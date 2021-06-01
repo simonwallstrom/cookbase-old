@@ -1,4 +1,7 @@
 import Nav from './Nav';
+import { useUser } from '../lib/useUser';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const SiteLayout = ({ children }) => {
   return (
@@ -9,6 +12,15 @@ const SiteLayout = ({ children }) => {
 };
 
 const AppLayout = ({ children }) => {
+  const { userLoading, loggedIn } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!userLoading && !loggedIn) {
+      router.replace('/');
+    }
+  }, [userLoading, loggedIn]);
+
   return (
     <div className="flex min-h-screen">
       <Nav />

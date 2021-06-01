@@ -1,7 +1,7 @@
-import Head from "next/head";
-import Layout from "../components/Layout";
-import { UserContextProvider } from "../lib/useUser";
-import "../styles/globals.css";
+import Head from 'next/head';
+import Layout from '../components/Layout';
+import { UserContextProvider } from '../lib/useUser';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   const layout = Component.Layout;
