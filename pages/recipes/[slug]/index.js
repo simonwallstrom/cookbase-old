@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ArrowLeft, Hash, MoreHorizontal } from 'react-feather';
 import { useEffect, useState } from 'react';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../../../lib/supabase';
 
 const ListItem = ({ val }) => {
   if (val.endsWith(':') || val.trimEnd().endsWith(':')) {
@@ -61,11 +61,16 @@ const RecipeDetails = () => {
                   <ArrowLeft size={20} />
                 </a>
               </Link>
-              <div className="flex space-x-4">
+              <Link href={`/recipes/${recipe.slug}/edit`}>
+                <a className="flex items-center p-3 leading-snug bg-white rounded-full hover:bg-gray-200">
+                  <MoreHorizontal size={20} />
+                </a>
+              </Link>
+              {/* <div className="flex space-x-4">
                 <button className="flex items-center p-3 leading-snug bg-white rounded-full hover:bg-gray-200">
                   <MoreHorizontal size={20} />
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="w-full max-w-5xl px-12 mx-auto">

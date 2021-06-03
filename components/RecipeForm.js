@@ -5,20 +5,29 @@ import { supabase } from '../lib/supabase';
 import { useUser } from '../lib/useUser';
 import Button from './Button';
 
-export default function RecipeForm() {
+export default function RecipeForm({ isEdit, loadingRecipe, editRecipe }) {
   const router = useRouter();
   const { user } = useUser();
 
   const [recipeName, setRecipeName] = useState('');
-  const [description, setDescription] = useState(null);
-  const [category, setCategory] = useState(null);
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
-  const [servings, setServings] = useState(null);
-  const [ingredients, setIngredients] = useState(null);
-  const [instructions, setInstructions] = useState(null);
+  const [servings, setServings] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [instructions, setInstructions] = useState('');
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    setRecipeName(editRecipe?.name || '');
+    setDescription(editRecipe?.description || '');
+    setCategory(editRecipe?.category || '');
+    setServings(editRecipe?.servings || '');
+    setIngredients(arrayToText(editRecipe?.ingredients || ''));
+    setInstructions(arrayToText(editRecipe?.instructions || ''));
+  }, [editRecipe]);
 
   const fetchCategories = async () => {
     let { data: categories, error } = await supabase
@@ -38,28 +47,49 @@ export default function RecipeForm() {
     return text;
   }
 
-  const addRecipe = async (e) => {
+  function arrayToText(arr) {
+    if (arr && arr.length > 0) {
+      let text = arr.join('\n');
+      return text;
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     await new Promise((res) => setTimeout(res, 1500));
-    const { data, error } = await supabase.from('recipes').insert({
+
+    const recipeData = {
       name: recipeName,
       description: description,
       category: 2,
-      servings: servings,
+      servings: Number(servings),
       ingredients: textToArray(ingredients),
       instructions: textToArray(instructions),
       user_id: user.id,
-    });
-    if (error) setErrorMessage(error.message);
-    if (data) {
-      router.replace('/recipes/' + data[0].slug);
+    };
+
+    if (isEdit) {
+      const { data, error } = await supabase
+        .from('recipes')
+        .update(recipeData)
+        .eq('slug', editRecipe.slug);
+      if (error) setErrorMessage(error.message);
+      if (data) {
+        router.replace('/recipes/' + data[0].slug);
+      }
+    } else {
+      const { data, error } = await supabase.from('recipes').insert(recipeData);
+      if (error) setErrorMessage(error.message);
+      if (data) {
+        router.replace('/recipes/' + data[0].slug);
+      }
     }
     setLoading(false);
   };
 
   return (
-    <form onSubmit={addRecipe}>
+    <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-6 mt-8 md:gap-12 md:flex-row">
         <div className="flex-1">
           <div className="">
@@ -68,6 +98,8 @@ export default function RecipeForm() {
               type="text"
               id="recipeName"
               placeholder="Smash burger..."
+              value={recipeName}
+              disabled={loadingRecipe}
               autoFocus
               onChange={(e) => setRecipeName(e.target.value)}
             />
@@ -78,6 +110,8 @@ export default function RecipeForm() {
               type="text"
               id="description"
               placeholder="The best way to make a mean burger..."
+              value={description}
+              disabled={loadingRecipe}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
@@ -88,6 +122,8 @@ export default function RecipeForm() {
                 className="leading-normal"
                 type="text"
                 id="category"
+                value={category}
+                disabled={loadingRecipe}
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="choose">Choose category...</option>
@@ -104,6 +140,8 @@ export default function RecipeForm() {
                 type="number"
                 id="servings"
                 placeholder="4"
+                value={servings}
+                disabled={loadingRecipe}
                 onChange={(e) => setServings(e.target.value)}
               />
             </div>
@@ -154,6 +192,8 @@ export default function RecipeForm() {
             rows="6"
             id="ingredients"
             placeholder="Brisket..."
+            value={ingredients}
+            disabled={loadingRecipe}
             onChange={(e) => setIngredients(e.target.value)}
           ></textarea>
           <p className="mt-2 text-sm text-gray-500">
@@ -166,6 +206,8 @@ export default function RecipeForm() {
             rows="6"
             id="instructions"
             placeholder="Bring out the meat grinder..."
+            value={instructions}
+            disabled={loadingRecipe}
             onChange={(e) => setInstructions(e.target.value)}
           ></textarea>
           <p className="mt-2 text-sm text-gray-500">

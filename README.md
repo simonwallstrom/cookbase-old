@@ -1,4 +1,4 @@
-# cookbase.simonwallstrom.com
+# Cookbase
 
 Meet Cookbase – The opinionated way to collect and store your favourite recipes. Most recipe apps do too much – We keep the simplicity of the handwritten experience.
 

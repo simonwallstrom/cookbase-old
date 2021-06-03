@@ -8,6 +8,10 @@ body,
   min-height: 100%;
 }
 
+body {
+  font-size: 0.9375rem;
+}
+
 @layer base {
   label {
     @apply block mb-1;
