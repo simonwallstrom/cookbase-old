@@ -5,7 +5,7 @@ export default function NavLink({ children, href, ...restProps }) {
   const classNames =
     router.pathname === href
       ? 'bg-gray-200 text-black cursor-default'
-      : 'hover:text-black hover:bg-gray-50 text-gray-700';
+      : 'hover:text-black hover:bg-gray-50 text-gray-600';
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ export default function NavLink({ children, href, ...restProps }) {
     <a
       href={href}
       onClick={handleClick}
-      className={`px-10 py-2.5 font-medium ${classNames}`}
+      className={`px-10 py-2.5 ${classNames}`}
       {...restProps}
     >
       {children}

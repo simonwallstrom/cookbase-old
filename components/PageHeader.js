@@ -8,7 +8,7 @@ const PageHeader = (props) => {
         <h1 className="text-3xl font-extrabold">{props.title}</h1>
       </div>
       <div className="flex items-center space-x-8">
-        <div className="relative text-gray-400 focus-within:text-black">
+        <div className="relative hidden text-gray-400 lg:block focus-within:text-black">
           <div className="absolute inset-y-0 flex items-center pl-3">
             <Search size={16} />
           </div>

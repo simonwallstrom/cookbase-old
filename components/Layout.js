@@ -2,6 +2,7 @@ import Nav from './Nav';
 import { useUser } from '../lib/useUser';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import MobileNav from './MobileNav';
 
 const SiteLayout = ({ children }) => {
   return (
@@ -24,6 +25,7 @@ const AppLayout = ({ children }) => {
   return (
     <div className="flex min-h-screen">
       <Nav />
+      <MobileNav />
       <main className="flex flex-col flex-1">{children}</main>
     </div>
   );

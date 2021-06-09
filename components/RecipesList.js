@@ -3,7 +3,7 @@ import { Image } from 'react-feather';
 
 const RecipesList = ({ recipes }) => {
   return (
-    <div className="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-2 gap-6 lg:gap-8 md:grid-cols-3">
       {recipes?.map((recipe) => (
         <Link key={recipe.id} href={`/recipes/${recipe.slug}`}>
           <a className="hover:opacity-70">
@@ -11,7 +11,9 @@ const RecipesList = ({ recipes }) => {
               <img
                 src={recipe.image}
                 alt={recipe.name}
-                className="object-cover w-full h-40 rounded-lg"
+                width={400}
+                height={250}
+                className="rounded-lg"
               />
             ) : (
               <div className="flex items-center justify-center w-full h-40 bg-gray-100 rounded-lg">

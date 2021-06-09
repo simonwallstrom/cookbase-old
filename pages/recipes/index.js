@@ -20,8 +20,9 @@ export default function Recipes() {
   }, []);
 
   return (
-    <div className="px-24 py-8">
-      <PageHeader title="All recipes" />
+    <div className="w-full max-w-5xl p-6 py-8 mx-auto lg:px-12">
+      <PageHeader title="Recipes" />
+      <div className="flex h-8"></div>
       <RecipesList recipes={recipes} />
     </div>
   );

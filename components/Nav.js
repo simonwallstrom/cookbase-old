@@ -4,7 +4,7 @@ import NavLink from './navLink';
 
 export default function Nav() {
   return (
-    <nav className="sticky top-0 flex-col hidden h-screen bg-gray-100 lg:flex w-80">
+    <nav className="sticky top-0 flex-col hidden h-screen bg-gray-100 lg:flex w-72">
       <div className="flex items-center justify-between p-10">
         <Link href="/recipes">
           <a>
