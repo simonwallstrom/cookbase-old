@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import PageHeader from '../../components/PageHeader';
 import RecipesList from '../../components/RecipesList';
+import { Container } from '../../components/Ui';
 
 export default function Recipes() {
   const [recipes, setRecipes] = useState([]);
@@ -20,10 +21,13 @@ export default function Recipes() {
   }, []);
 
   return (
-    <div className="w-full max-w-5xl p-6 py-8 mx-auto lg:px-12">
-      <PageHeader title="Recipes" />
-      <div className="flex h-8"></div>
+    <Container>
+      <PageHeader
+        title="Recipes"
+        buttonText="New recipe"
+        buttonURL="/recipes/new"
+      />
       <RecipesList recipes={recipes} />
-    </div>
+    </Container>
   );
 }

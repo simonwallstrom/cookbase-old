@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { ArrowLeft, Hash, MoreHorizontal } from 'react-feather';
+import { ArrowLeft, Bookmark, MoreHorizontal, Edit } from 'react-feather';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../lib/supabase';
 
@@ -61,22 +61,22 @@ const RecipeDetails = () => {
                   <ArrowLeft size={20} />
                 </a>
               </Link>
-              <Link href={`/recipes/${recipe.slug}/edit`}>
-                <a className="flex items-center p-3 leading-snug bg-white rounded-full hover:bg-gray-200">
-                  <MoreHorizontal size={20} />
-                </a>
-              </Link>
-              {/* <div className="flex space-x-4">
+              <div className="flex space-x-4">
+                <Link href={`/recipes/${recipe.slug}/edit`}>
+                  <a className="flex items-center p-3 leading-snug bg-white rounded-full hover:bg-gray-200">
+                    <Edit size={20} />
+                  </a>
+                </Link>
                 <button className="flex items-center p-3 leading-snug bg-white rounded-full hover:bg-gray-200">
                   <MoreHorizontal size={20} />
                 </button>
-              </div> */}
+              </div>
             </div>
           </div>
           <div className="w-full max-w-5xl px-12 mx-auto">
             <div className="max-w-3xl">
               <div className="flex items-center space-x-1.5 text-sm font-medium text-white">
-                <Hash size={16} />
+                <Bookmark size={16} />
                 <span>Varmrätt</span>
               </div>
               {loading ? (

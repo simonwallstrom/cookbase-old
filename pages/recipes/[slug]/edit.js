@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import RecipeForm from '../../../components/RecipeForm';
+import PageHeader from '../../../components/PageHeader';
 import { supabase } from '../../../lib/supabase';
+import { Container } from '../../../components/Ui';
 
 export default function EditRecipe() {
   const router = useRouter();
@@ -29,9 +31,9 @@ export default function EditRecipe() {
   }, [slug]);
 
   return (
-    <div className="w-full max-w-5xl px-12 pt-8 pb-16 mx-auto">
-      <h1 className="mt-1 text-3xl font-extrabold">Edit recipe</h1>
+    <Container>
+      <PageHeader title="Edit recipe" />
       <RecipeForm isEdit={true} loadingRecipe={loading} editRecipe={recipe} />
-    </div>
+    </Container>
   );
 }

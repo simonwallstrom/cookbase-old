@@ -2,10 +2,14 @@ import { useRouter } from 'next/router';
 
 export default function NavLink({ children, href, ...restProps }) {
   const router = useRouter();
+  console.log(router);
   const classNames =
-    router.pathname === href
+    router.asPath === href
       ? 'bg-gray-200 text-black cursor-default'
       : 'hover:text-black hover:bg-gray-50 text-gray-600';
+
+  console.log('pathname', router.pathname);
+  console.log('href', href);
 
   const handleClick = (e) => {
     e.preventDefault();

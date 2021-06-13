@@ -2,18 +2,14 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import PageHeader from '../../components/PageHeader';
 import RecipesList from '../../components/RecipesList';
-import { ArrowRight } from 'react-feather';
+import { Container } from '../../components/Ui';
 import Link from 'next/link';
 
 export default function Recipe() {
   const [recipes, setRecipes] = useState([]);
 
   const fetchRecipes = async () => {
-    let {
-      data: recipes,
-      error,
-      count,
-    } = await supabase
+    let { data: recipes, error } = await supabase
       .from('recipes')
       .select('id, slug, name, image, created', { count: 'exact' })
       .limit(0);
@@ -26,7 +22,7 @@ export default function Recipe() {
   }, []);
 
   return (
-    <div className="px-24 py-8 ">
+    <Container>
       <PageHeader title="Most recent" />
       <RecipesList recipes={recipes} />
       <div className="flex flex-col items-center justify-center px-8 py-10 border-2 border-dashed">
@@ -120,6 +116,6 @@ export default function Recipe() {
           </a>
         </Link>
       </div>
-    </div>
+    </Container>
   );
 }

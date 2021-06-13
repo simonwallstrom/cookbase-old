@@ -11,8 +11,8 @@ export default function RecipeForm({ isEdit, loadingRecipe, editRecipe }) {
 
   const [recipeName, setRecipeName] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
-  const [categories, setCategories] = useState([]);
+  const [collection, setCollection] = useState('');
+  const [collections, setCollections] = useState([]);
   const [servings, setServings] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [instructions, setInstructions] = useState('');
@@ -23,23 +23,23 @@ export default function RecipeForm({ isEdit, loadingRecipe, editRecipe }) {
   useEffect(() => {
     setRecipeName(editRecipe?.name || '');
     setDescription(editRecipe?.description || '');
-    setCategory(editRecipe?.category || '');
+    setCollection(editRecipe?.collection || '');
     setServings(editRecipe?.servings || '');
     setIngredients(arrayToText(editRecipe?.ingredients || ''));
     setInstructions(arrayToText(editRecipe?.instructions || ''));
   }, [editRecipe]);
 
-  const fetchCategories = async () => {
-    let { data: categories, error } = await supabase
-      .from('categories')
+  const fetchCollections = async () => {
+    let { data: collections, error } = await supabase
+      .from('collections')
       .select('id, name')
       .order('name', { ascending: true });
     if (error) console.log('error', error);
-    setCategories(categories);
+    setCollections(collections);
   };
 
   useEffect(() => {
-    fetchCategories();
+    fetchCollections();
   }, []);
 
   function textToArray(str) {
@@ -90,7 +90,7 @@ export default function RecipeForm({ isEdit, loadingRecipe, editRecipe }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-6 mt-8 md:gap-12 md:flex-row">
+      <div className="flex flex-col gap-6 md:gap-12 md:flex-row">
         <div className="flex-1">
           <div className="">
             <label htmlFor="recipeName">Recipe name</label>
@@ -117,19 +117,19 @@ export default function RecipeForm({ isEdit, loadingRecipe, editRecipe }) {
           </div>
           <div className="flex flex-col gap-6 mt-6 md:flex-row">
             <div className="md:w-2/3">
-              <label htmlFor="category">Category</label>
+              <label htmlFor="collection">Collection</label>
               <select
                 className="leading-normal"
                 type="text"
-                id="category"
-                value={category}
+                id="collection"
+                value={collection}
                 disabled={loadingRecipe}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => setCollection(e.target.value)}
               >
-                <option value="choose">Choose category...</option>
-                {categories?.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
+                <option value="choose">Choose collection...</option>
+                {collections?.map((collection) => (
+                  <option key={collection.id} value={collection.id}>
+                    {collection.name}
                   </option>
                 ))}
               </select>
