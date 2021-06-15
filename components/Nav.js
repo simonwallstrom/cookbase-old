@@ -7,7 +7,6 @@ import {
   CornerDownRight,
   Settings,
   Star,
-  PlusCircle,
 } from 'react-feather';
 import { supabase } from '../lib/supabase';
 import NavLink from './navLink';
@@ -17,7 +16,7 @@ export default function Nav() {
 
   const fetchCollections = async () => {
     let { data: collections, error } = await supabase
-      .from('collections_with_recipe_count')
+      .from('collections_with_recipe_count3')
       .select('*')
       .limit(3);
     if (error) console.log('error', error);

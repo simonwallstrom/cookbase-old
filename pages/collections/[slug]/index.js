@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import PageHeader from '../../../components/PageHeader';
 import RecipesList from '../../../components/RecipesList';
+import PageHeader from '../../../components/PageHeader';
 import { Container } from '../../../components/Ui';
 import { supabase } from '../../../lib/supabase';
 
@@ -45,11 +45,11 @@ export default function CollectionDetails() {
   return (
     <Container>
       <PageHeader
-        title={collection.name}
-        buttonText="New collection"
-        buttonURL="/collections/new"
+        title={collection?.name}
+        buttonText="Edit collection"
+        buttonURL="Edit"
       />
-      <RecipesList recipes={collection.recipes} />
+      <RecipesList recipes={collection?.recipes} />
     </Container>
   );
 }
