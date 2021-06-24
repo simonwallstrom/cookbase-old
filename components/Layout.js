@@ -1,7 +1,4 @@
 import Nav from './Nav';
-import { useUser } from '../lib/useUser';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import MobileNav from './MobileNav';
 
 const SiteLayout = ({ children }) => {
@@ -12,29 +9,21 @@ const SiteLayout = ({ children }) => {
   );
 };
 
-const AppLayout = ({ children }) => {
-  const { userLoading, loggedIn } = useUser();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!userLoading && !loggedIn) {
-      router.replace('/');
-    }
-  }, [userLoading, loggedIn]);
-
+const AppLayout = ({ children, collections }) => {
+  const simon = 'simon';
   return (
     <div className="flex min-h-screen">
-      <Nav />
+      <Nav collections={collections} />
       <MobileNav />
       <main className="flex flex-col flex-1">{children}</main>
     </div>
   );
 };
 
-export const Layout = ({ children, type = 'app' }) => {
+export const Layout = ({ children, type = 'app', collections }) => {
   if (type == 'site') return <SiteLayout>{children}</SiteLayout>;
 
-  return <AppLayout>{children}</AppLayout>;
+  return <AppLayout collections={collections}>{children}</AppLayout>;
 };
 
 export default Layout;

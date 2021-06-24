@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://rsms.me/inter/inter.css');
+html {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
 html,
 body,
 #__next {

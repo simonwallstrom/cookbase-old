@@ -5,7 +5,11 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   mode: 'jit',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter Var', ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
   variants: {
     extend: {

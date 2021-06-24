@@ -27,6 +27,7 @@ export default function Recipes() {
         buttonText="New recipe"
         buttonURL="/recipes/new"
       />
+
       <RecipesList recipes={recipes} />
     </Container>
   );
