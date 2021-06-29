@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import Button from './Button';
 import { supabase } from '../lib/supabase';
@@ -10,7 +10,7 @@ export default function CollectionForm({
   setIsOpen,
   isEdit,
   loadingCollection,
-  editCollection,
+  setNewCollection,
   collections,
   setCollections,
 }) {
@@ -46,6 +46,7 @@ export default function CollectionForm({
       if (error) setErrorMessage(error.message);
       if (data) {
         setIsOpen(false);
+        setNewCollection(data.id);
         setCollections([data, ...collections]);
       }
     }
@@ -93,7 +94,7 @@ export default function CollectionForm({
               loading={loading}
               type="submit"
             >
-              Save recipe
+              Save collection
             </Button>
             <Link href="/recipes">
               <a className="btn">Cancel</a>

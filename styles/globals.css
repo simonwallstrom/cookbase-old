@@ -12,10 +12,10 @@ body,
 #__next {
   min-height: 100%;
 }
-/* 
+
 body {
   font-size: 0.9375rem;
-} */
+}
 
 @layer base {
   label {
@@ -24,7 +24,7 @@ body {
   input,
   select,
   textarea {
-    @apply block w-full max-w-md px-3 py-2 border border-gray-300 rounded-md shadow-sm;
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm;
     @apply focus:border-black focus:shadow-none focus:outline-none;
   }
   select {

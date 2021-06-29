@@ -9,21 +9,20 @@ const SiteLayout = ({ children }) => {
   );
 };
 
-const AppLayout = ({ children, collections }) => {
-  const simon = 'simon';
+const AppLayout = ({ children }) => {
   return (
     <div className="flex min-h-screen">
-      <Nav collections={collections} />
+      <Nav />
       <MobileNav />
       <main className="flex flex-col flex-1">{children}</main>
     </div>
   );
 };
 
-export const Layout = ({ children, type = 'app', collections }) => {
+export const Layout = ({ children, type = 'app' }) => {
   if (type == 'site') return <SiteLayout>{children}</SiteLayout>;
 
-  return <AppLayout collections={collections}>{children}</AppLayout>;
+  return <AppLayout>{children}</AppLayout>;
 };
 
 export default Layout;

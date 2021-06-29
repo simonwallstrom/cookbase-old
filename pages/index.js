@@ -20,14 +20,14 @@ export default function Home() {
       <div className="flex justify-center mt-6">
         {user ? (
           <Link href="/recipes">
-            <a className="flex items-center space-x-2 px-6 py-3.5 font-medium hover:bg-gray-800 focus:bg-black rounded-lg bg-black text-white">
+            <a className="flex items-center space-x-2 px-6 py-3.5 font-medium hover:bg-gray-800 focus:bg-black rounded-xl bg-black text-white">
               <span>Continue to the app</span>
               <ArrowRight size={16} />
             </a>
           </Link>
         ) : (
           <Link href="/signin">
-            <a className="flex items-center space-x-2 px-6 py-3.5 font-medium hover:bg-gray-800 focus:bg-black rounded-lg bg-black text-white">
+            <a className="flex items-center space-x-2 px-6 py-3.5 font-medium hover:bg-gray-800 focus:bg-black rounded-xl bg-black text-white">
               <span>Sign in to get started</span>
               <ArrowRight size={16} />
             </a>

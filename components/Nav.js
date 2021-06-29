@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import { Book, Bookmark, Search, Settings, Star } from 'react-feather';
 import NavLink from './navLink';
+import { useCollections } from '../lib/useCollections';
 
-export default function Nav({ collections }) {
+export default function Nav() {
+  const { collections } = useCollections();
+
   return (
     <nav className="sticky top-0 flex-col hidden h-screen bg-gray-100 lg:flex w-72">
       <div className="flex items-center justify-between p-10">
@@ -35,15 +38,15 @@ export default function Nav({ collections }) {
       <div className="flex items-center justify-between px-10 mt-10 mb-3 font-mono text-sm uppercase">
         <div>Collections</div>
         <Link href="/collections">
-          <a className="underline hover:no-underline">View all</a>
+          <a className="text-xs hover:underline">View all →</a>
         </Link>
       </div>
       <div className="flex flex-col overflow-y-scroll">
-        {collections.map((collection) => (
+        {collections?.map((collection) => (
           <NavLink key={collection.id} href={`/collections/${collection.slug}`}>
             <div className="flex items-center space-x-2">
               <Bookmark size={16} />
-              <span>{collection.name}</span>
+              <div className="line-clamp-1">{collection.name}</div>
             </div>
           </NavLink>
         ))}
