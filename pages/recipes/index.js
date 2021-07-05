@@ -11,6 +11,7 @@ export default function Recipes() {
     let { data: recipes, error } = await supabase
       .from('recipes')
       .select('id, slug, name, image')
+      .is('deleted', null)
       .order('name', { ascending: true });
     if (error) console.log('error', error);
     setRecipes(recipes);

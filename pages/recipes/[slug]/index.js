@@ -40,6 +40,19 @@ const RecipeDetails = () => {
     if (error) console.log('error', error);
   };
 
+  const deleteRecipe = async () => {
+    var date = new Date();
+
+    const { data, error } = await supabase
+      .from('recipes')
+      .update({ deleted: date.toISOString() })
+      .eq('slug', slug);
+
+    if (data) {
+      router.replace('/recipes/');
+    }
+  };
+
   useEffect(() => {
     if (slug) {
       getRecipe(slug);
@@ -68,7 +81,10 @@ const RecipeDetails = () => {
                       <Edit size={20} />
                     </a>
                   </Link>
-                  <button className="flex items-center p-3 leading-snug bg-white rounded-full hover:bg-gray-200">
+                  <button
+                    onClick={deleteRecipe}
+                    className="flex items-center p-3 leading-snug bg-white rounded-full hover:bg-gray-200"
+                  >
                     <MoreHorizontal size={20} />
                   </button>
                 </div>
@@ -100,7 +116,7 @@ const RecipeDetails = () => {
       <div className="flex flex-1">
         <Container>
           <div className="flex flex-col flex-1 w-full gap-12 md:flex-row">
-            <div className="pt-10 md:border-r md:pr-12 md:w-1/3">
+            <div className="pt-10 pb-24 md:border-r md:pr-12 md:w-1/3">
               <div className="flex flex-wrap items-baseline mb-4 lg:justify-between">
                 <h2 className="mr-2 text-2xl font-bold">Ingredients</h2>
                 <div className="text-sm font-medium text-gray-500">
@@ -119,7 +135,7 @@ const RecipeDetails = () => {
                 <div>Loading...</div>
               )}
             </div>
-            <div className="pt-10 md:w-2/3 pb-44">
+            <div className="pt-10 pb-24 md:w-2/3">
               <h2 className="mb-4 text-2xl font-bold">Instructions</h2>
               {!loading ? (
                 <div>
