@@ -3,51 +3,28 @@ import { useEffect, useState } from 'react';
 import RecipesList from '../../../components/RecipesList';
 import PageHeader from '../../../components/PageHeader';
 import { Container } from '../../../components/Ui';
-import { supabase } from '../../../lib/supabase';
+import CollectionForm from '../../../components/CollectionForm';
+import { useCollections } from '../../../lib/useCollections';
 
 export default function CollectionDetails() {
-  const router = useRouter();
-  const { slug } = router.query;
-  const [collection, setCollection] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const { collection, setCollection } = useCollections();
 
-  const getCollection = async (slug) => {
-    setLoading(true);
-    // await new Promise((res) => setTimeout(res, 1500));
-    let { data, error } = await supabase
-      .from('collections')
-      .select(
-        `
-        name,
-        description,
-        slug,
-        recipes(
-          name,
-          id,
-          image,
-          slug
-        )
-        `
-      )
-      .eq('slug', slug)
-      .single();
-    setCollection(data);
-    setLoading(false);
-    if (error) console.log('error', error);
-  };
-
-  useEffect(() => {
-    if (slug) {
-      getCollection(slug);
-    }
-  }, [slug]);
+  console.log(isOpen);
 
   return (
     <Container>
+      <CollectionForm
+        collection={collection}
+        setCollection={setCollection}
+        isEdit={true}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
       <PageHeader
-        title={collection?.name}
+        title={collection.name}
         buttonText="Edit collection"
-        buttonURL="Edit"
+        handleClick={() => setIsOpen(true)}
       />
       <RecipesList recipes={collection?.recipes} />
     </Container>
