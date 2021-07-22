@@ -52,7 +52,7 @@ export default function Signin() {
           <label className="sr-only" htmlFor="email">
             Your email
           </label>
-          <div className="relative mb-4 text-gray-400 focus-within:text-black">
+          <div className="relative mb-6 text-gray-400 focus-within:text-black">
             <div className="absolute inset-y-0 flex items-center pl-4">
               <Mail size={16} />
             </div>
@@ -62,7 +62,7 @@ export default function Signin() {
               autoFocus={true}
               required={true}
               autoComplete="username"
-              className="w-full pr-4 pl-10 py-3.5"
+              className="w-full shadow-flat pr-4 pl-10 py-3.5"
               placeholder="Email..."
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -80,7 +80,7 @@ export default function Signin() {
               id="password"
               required={true}
               autoComplete="current-password"
-              className="w-full pr-4 pl-10 py-3.5"
+              className="w-full shadow-flat pr-4 pl-10 py-3.5"
               placeholder="Password..."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -88,9 +88,10 @@ export default function Signin() {
           </div>
         </div>
         <button
-          className={`flex items-center space-x-2 px-6 w-full justify-center mt-8 py-3.5 font-medium hover:bg-gray-800 focus:bg-black rounded-lg bg-black text-white ${
+          className={`flex items-center space-x-2 px-6 w-full justify-center mt-4 py-3.5 font-medium hover:bg-gray-800 focus:bg-black rounded-lg bg-black text-white ${
             !password.length || !email.length ? ' cursor-not-allowed' : ''
           }`}
+          className="flex w-full justify-center items-center py-3.5 space-x-2 hover:translate-x-px mt-6 transition-all hover:translate-y-px hover:shadow-none font-medium bg-pink-300 border border-black pl-7 pr-6 rounded-lg shadow-flat"
           type="submit"
           disabled={!password.length || !email.length}
         >

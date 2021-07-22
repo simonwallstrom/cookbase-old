@@ -1,25 +1,20 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-export default function NavLink({ children, href, ...restProps }) {
+export default function NavLink({ children, href }) {
   const router = useRouter();
   const classNames =
     router.asPath === href
-      ? 'bg-gray-200 text-black cursor-default'
-      : 'hover:text-black hover:bg-gray-50 text-gray-600';
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    router.push(href).then(() => window.scrollTo(0, 0));
-  };
+      ? 'bg-yellow-300 border-black text-black cursor-default'
+      : 'border-black hover:border-black border-transparent hover:bg-gray-200';
 
   return (
-    <a
-      href={href}
-      onClick={handleClick}
-      className={`px-10 py-2.5 ${classNames}`}
-      {...restProps}
-    >
-      {children}
-    </a>
+    <Link href={href}>
+      <a
+        className={`px-10 border-b transition-all -mb-px border-t py-2.5 ${classNames}`}
+      >
+        {children}
+      </a>
+    </Link>
   );
 }

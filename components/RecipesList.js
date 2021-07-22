@@ -12,8 +12,8 @@ const RecipesList = ({ recipes }) => {
                 src={recipe.image}
                 alt={recipe.name}
                 width={400}
-                height={250}
-                className="rounded-lg"
+                height={350}
+                className="border border-black rounded-xl shadow-flat"
               />
             ) : (
               <div className="flex items-center justify-center w-full h-40 bg-gray-100 rounded-lg">

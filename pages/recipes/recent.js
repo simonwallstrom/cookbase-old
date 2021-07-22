@@ -111,7 +111,7 @@ export default function Recipe() {
           There's nothing here yet, so let's create a new recipe.
         </p>
         <Link href="/recipes/new">
-          <a className="btn btn--primary">
+          <a className="btn btn--pink">
             <span>New recipe</span>
           </a>
         </Link>

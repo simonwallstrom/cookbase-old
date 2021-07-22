@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import Button from './Button';
@@ -17,11 +18,10 @@ export default function CollectionForm({
   let inputRef = useRef(null);
   const isMounted = useIsMounted();
   const { user } = useUser();
+  const router = useRouter();
   const [collectionName, setCollectionName] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  console.log('from form', isOpen);
 
   useEffect(() => {
     setCollectionName(collection?.name || '');
@@ -45,9 +45,7 @@ export default function CollectionForm({
       if (error) setErrorMessage(error.message);
       if (data) {
         setIsOpen(false);
-        console.log(data);
         setCollection(data[0]);
-        console.log(collection[0]);
       }
     } else {
       const { data, error } = await supabase
@@ -63,23 +61,42 @@ export default function CollectionForm({
     setLoading(false);
   };
 
+  const deleteCollection = async () => {
+    const { data, error } = await supabase
+      .from('collections')
+      .delete()
+      .eq('slug', collection.slug);
+    if (data) {
+      setIsOpen(false);
+      const reducedCollections = collections?.filter(
+        (item) => item.slug !== collection?.slug
+      );
+      setCollections(reducedCollections);
+      router.replace('/collections/');
+    }
+  };
+
   return (
     <div>
       {isMounted() && (
         <Dialog
           as="div"
           initialFocus={inputRef}
-          className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto bg-black bg-opacity-30"
+          className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto bg-gray-900 bg-opacity-50"
           open={isOpen}
           onClose={() => setIsOpen(false)}
         >
           <Dialog.Overlay className="fixed inset-0" />
-          <div className="relative w-full max-w-lg bg-white rounded-lg shadow-md lg:px-12 lg:py-10">
+          <div className="relative w-full max-w-lg bg-white border border-black shadow-flat rounded-xl lg:px-12 lg:py-10">
             <Dialog.Title className="text-2xl font-bold">
-              New collection
+              {isEdit ? (
+                <span>Edit Collection</span>
+              ) : (
+                <span>New collection</span>
+              )}
             </Dialog.Title>
             <Dialog.Description className="text-gray-600">
-              Group recipes together with a new collection
+              Group recipes together with a new collection.
             </Dialog.Description>
 
             <form onSubmit={handleSubmit}>
@@ -101,19 +118,29 @@ export default function CollectionForm({
                   {errorMessage}
                 </div>
               ) : null}
-              <div className="flex mt-10 space-x-6">
+              <div className="flex mt-10">
                 <Button
-                  className="btn btn--primary"
+                  className="mr-6 btn btn--pink"
                   loading={loading}
                   type="submit"
                 >
-                  Save collection
+                  {isEdit ? (
+                    <span>Update Collection</span>
+                  ) : (
+                    <span>Create collection</span>
+                  )}
                 </Button>
                 <button className="btn" onClick={() => setIsOpen(false)}>
                   Cancel
                 </button>
               </div>
             </form>
+            <button
+              className="ml-auto bg-red-300 btn"
+              onClick={deleteCollection}
+            >
+              Delete
+            </button>
           </div>
         </Dialog>
       )}

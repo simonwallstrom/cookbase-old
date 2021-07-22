@@ -9,12 +9,16 @@ module.exports = {
       fontFamily: {
         sans: ['Inter Var', ...defaultTheme.fontFamily.sans],
       },
+      boxShadow: {
+        flat: '1px 1px #000',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
     },
   },
   variants: {
-    extend: {
-      borderStyle: ['hover', 'focus', 'focus-within'],
-    },
+    extend: {},
   },
   plugins: [require('@tailwindcss/line-clamp')],
 };

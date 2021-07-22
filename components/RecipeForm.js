@@ -221,7 +221,7 @@ export default function RecipeForm({ isEdit, loadingRecipe, editRecipe }) {
         </div>
       ) : null}
       <div className="flex mt-10 space-x-6">
-        <Button className="btn btn--primary" loading={loading} type="submit">
+        <Button className="btn btn--pink" loading={loading} type="submit">
           Save recipe
         </Button>
         <Link href="/recipes">

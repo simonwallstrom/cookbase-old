@@ -13,9 +13,9 @@ body,
   min-height: 100%;
 }
 
-/* body {
+body {
   font-size: 0.9375rem;
-} */
+}
 
 @layer base {
   label {
@@ -24,8 +24,8 @@ body,
   input,
   select,
   textarea {
-    @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm;
-    @apply focus:border-black focus:shadow-none focus:outline-none;
+    @apply block w-full px-3 py-2 transition-all border border-black rounded-md outline-none shadow-flat;
+    @apply focus:shadow-none focus:outline-none focus:bg-yellow-50;
   }
   select {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
@@ -38,12 +38,17 @@ body,
 
 @layer components {
   .btn {
-    @apply block px-4 py-2 font-medium bg-gray-200 border border-transparent rounded-md;
-    @apply hover:bg-gray-300;
+    @apply block px-4 py-2 font-medium bg-gray-100 border border-black rounded-md shadow-flat;
+    @apply transition-all hover:translate-x-px hover:translate-y-px hover:shadow-none;
+    @apply focus:bg-gray-300;
   }
-  .btn--primary {
-    @apply text-white bg-black;
-    @apply hover:bg-gray-700;
+  .btn--pink {
+    @apply bg-pink-300;
+    @apply focus:bg-pink-400;
+  }
+  .btn--yellow {
+    @apply bg-yellow-300;
+    @apply focus:bg-yellow-400;
   }
 }
 
@@ -51,6 +56,9 @@ body,
   .text-gradient {
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+  .text-stroke {
+    -webkit-text-stroke: 0.5px black;
   }
 }
 

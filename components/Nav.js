@@ -1,17 +1,17 @@
 import Link from 'next/link';
 import { Book, Bookmark, Search, Settings, Star } from 'react-feather';
-import NavLink from './navLink';
+import NavLink from './NavLink';
 import { useCollections } from '../lib/useCollections';
 
 export default function Nav() {
   const { collections } = useCollections();
 
   return (
-    <nav className="sticky top-0 flex-col hidden h-screen bg-gray-100 lg:flex w-72">
-      <div className="flex items-center justify-between p-10">
+    <nav className="sticky top-0 flex-col hidden h-screen bg-gray-100 border-r border-black lg:flex w-72">
+      <div className="flex items-center justify-between p-10 pb-9">
         <Link href="/recipes">
           <a>
-            <img className="w-36" src="/logo.svg" alt="Cookbase" />
+            <img className="w-40" src="/logo.svg" alt="Cookbase" />
           </a>
         </Link>
       </div>
@@ -41,7 +41,7 @@ export default function Nav() {
           <a className="text-xs hover:underline">View all →</a>
         </Link>
       </div>
-      <div className="flex flex-col overflow-y-scroll">
+      <div className="flex flex-col pb-px overflow-y-scroll">
         {collections?.map((collection) => (
           <NavLink key={collection.id} href={`/collections/${collection.slug}`}>
             <div className="flex items-center space-x-2">
@@ -52,7 +52,7 @@ export default function Nav() {
         ))}
       </div>
       <div className="flex items-end flex-1">
-        <div className="flex flex-col w-full bg-gray-100 border-t">
+        <div className="flex flex-col w-full">
           <NavLink href="/account">
             <div className="flex items-center py-3 space-x-2">
               <Settings size={16} />

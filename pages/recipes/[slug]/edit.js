@@ -31,7 +31,7 @@ export default function EditRecipe() {
   }, [slug]);
 
   return (
-    <Container>
+    <Container className="mb-24">
       <PageHeader title="Edit recipe" />
       <RecipeForm isEdit={true} loadingRecipe={loading} editRecipe={recipe} />
     </Container>
