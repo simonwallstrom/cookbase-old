@@ -34,6 +34,9 @@ body {
     background-repeat: no-repeat;
     background-size: 1.5em 1.5em;
   }
+  button:disabled {
+    @apply cursor-not-allowed;
+  }
 }
 
 @layer components {

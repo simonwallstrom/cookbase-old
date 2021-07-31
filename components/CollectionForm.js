@@ -5,13 +5,13 @@ import Button from './Button';
 import { supabase } from '../lib/supabase';
 import { useUser } from '../lib/useUser';
 import { useIsMounted } from '../lib/useIsMounted';
+import useStore from '../lib/store';
+import { Trash2 } from 'react-feather';
 
 export default function CollectionForm({
   isOpen,
   setIsOpen,
   isEdit,
-  collections,
-  setCollections,
   collection,
   setCollection,
 }) {
@@ -20,6 +20,7 @@ export default function CollectionForm({
   const { user } = useUser();
   const router = useRouter();
   const [collectionName, setCollectionName] = useState('');
+  const { getAllCollections } = useStore();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -32,11 +33,6 @@ export default function CollectionForm({
     setLoading(true);
     await new Promise((res) => setTimeout(res, 1500));
 
-    const collectionData = {
-      name: collectionName,
-      user_id: user.id,
-    };
-
     if (isEdit) {
       const { data, error } = await supabase
         .from('collections')
@@ -46,18 +42,20 @@ export default function CollectionForm({
       if (data) {
         setIsOpen(false);
         setCollection(data[0]);
+        getAllCollections();
       }
     } else {
       const { data, error } = await supabase
         .from('collections')
-        .insert(collectionData)
+        .insert({ name: collectionName, user_id: user.id })
         .single();
       if (error) setErrorMessage(error.message);
       if (data) {
         setIsOpen(false);
-        setCollections([data, ...collections]);
+        getAllCollections();
       }
     }
+
     setLoading(false);
   };
 
@@ -66,12 +64,10 @@ export default function CollectionForm({
       .from('collections')
       .delete()
       .eq('slug', collection.slug);
+    if (error) setErrorMessage(error.message);
     if (data) {
       setIsOpen(false);
-      const reducedCollections = collections?.filter(
-        (item) => item.slug !== collection?.slug
-      );
-      setCollections(reducedCollections);
+      getAllCollections();
       router.replace('/collections/');
     }
   };
@@ -96,7 +92,7 @@ export default function CollectionForm({
               )}
             </Dialog.Title>
             <Dialog.Description className="text-gray-600">
-              Group recipes together with a new collection.
+              Group recipes together with a collection.
             </Dialog.Description>
 
             <form onSubmit={handleSubmit}>
@@ -133,14 +129,14 @@ export default function CollectionForm({
                 <button className="btn" onClick={() => setIsOpen(false)}>
                   Cancel
                 </button>
+                <button
+                  className="ml-auto bg-red-300 btn"
+                  onClick={deleteCollection}
+                >
+                  <Trash2 size={16} />
+                </button>
               </div>
             </form>
-            <button
-              className="ml-auto bg-red-300 btn"
-              onClick={deleteCollection}
-            >
-              Delete
-            </button>
           </div>
         </Dialog>
       )}

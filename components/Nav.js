@@ -1,10 +1,16 @@
 import Link from 'next/link';
 import { Book, Bookmark, Search, Settings, Star } from 'react-feather';
 import NavLink from './NavLink';
-import { useCollections } from '../lib/useCollections';
+import useStore from '../lib/store';
+import { useEffect } from 'react';
 
 export default function Nav() {
-  const { collections } = useCollections();
+  const collections = useStore((state) => state.collections);
+  const getAllCollections = useStore((state) => state.getAllCollections);
+
+  useEffect(() => {
+    getAllCollections();
+  }, []);
 
   return (
     <nav className="sticky top-0 flex-col hidden h-screen bg-gray-100 border-r border-black lg:flex w-72">

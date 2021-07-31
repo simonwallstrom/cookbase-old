@@ -5,13 +5,13 @@ export default function NavLink({ children, href }) {
   const router = useRouter();
   const classNames =
     router.asPath === href
-      ? 'bg-yellow-300 border-black text-black cursor-default'
-      : 'border-black hover:border-black border-transparent hover:bg-gray-200';
+      ? 'bg-yellow-200 border-black text-black cursor-default'
+      : 'border-transparent hover:bg-gray-200';
 
   return (
     <Link href={href}>
       <a
-        className={`px-10 border-b transition-all -mb-px border-t py-2.5 ${classNames}`}
+        className={`px-10 border-b transition-all border-t py-3 ${classNames}`}
       >
         {children}
       </a>

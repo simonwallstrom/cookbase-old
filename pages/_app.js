@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Layout from '../components/Layout';
 import { UserContextProvider } from '../lib/useUser';
 import '../styles/globals.css';
-import { CollectionsContextProvider } from '../lib/useCollections';
 
 function MyApp({ Component, pageProps }) {
   const layout = Component.Layout;
@@ -14,11 +13,9 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <UserContextProvider>
-        <CollectionsContextProvider>
-          <Layout type={layout}>
-            <Component {...pageProps} />
-          </Layout>
-        </CollectionsContextProvider>
+        <Layout type={layout}>
+          <Component {...pageProps} />
+        </Layout>
       </UserContextProvider>
     </>
   );

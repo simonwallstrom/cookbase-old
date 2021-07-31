@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Loader, Lock, Mail } from 'react-feather';
+import { ArrowRight, Lock, Mail } from 'react-feather';
+import Button from '../components/Button';
 import { useUser } from '../lib/useUser';
 
 Signin.Layout = 'site';
@@ -17,6 +18,7 @@ export default function Signin() {
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
+    await new Promise((res) => setTimeout(res, 1500));
     const { error, user } = await signIn({ email, password });
     if (!error && !user) alert('Check your email for the login link!');
     if (error) setErrorMessage(error.message);
@@ -40,7 +42,7 @@ export default function Signin() {
   return (
     <div className="max-w-md mx-auto text-center">
       <Link href="/">
-        <a className="flex items-center justify-center space-x-2">
+        <a className="flex items-center justify-center mt-10 space-x-2">
           <img className="w-48" src="/logo.svg" alt="Cookbase" />
         </a>
       </Link>
@@ -48,11 +50,11 @@ export default function Signin() {
         {greetingMessage()} Sign in to get started
       </h2>
       <form onSubmit={handleSignIn}>
-        <div className="rounded-lg shadow-sm">
+        <div className="space-y-4">
           <label className="sr-only" htmlFor="email">
             Your email
           </label>
-          <div className="relative mb-6 text-gray-400 focus-within:text-black">
+          <div className="relative text-gray-400 focus-within:text-black">
             <div className="absolute inset-y-0 flex items-center pl-4">
               <Mail size={16} />
             </div>
@@ -62,7 +64,7 @@ export default function Signin() {
               autoFocus={true}
               required={true}
               autoComplete="username"
-              className="w-full shadow-flat pr-4 pl-10 py-3.5"
+              className="pr-4 text-black pl-10 py-3.5"
               placeholder="Email..."
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -80,86 +82,27 @@ export default function Signin() {
               id="password"
               required={true}
               autoComplete="current-password"
-              className="w-full shadow-flat pr-4 pl-10 py-3.5"
+              className="pr-4 text-black pl-10 py-3.5"
               placeholder="Password..."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-        </div>
-        <button
-          className={`flex items-center space-x-2 px-6 w-full justify-center mt-4 py-3.5 font-medium hover:bg-gray-800 focus:bg-black rounded-lg bg-black text-white ${
-            !password.length || !email.length ? ' cursor-not-allowed' : ''
-          }`}
-          className="flex w-full justify-center items-center py-3.5 space-x-2 hover:translate-x-px mt-6 transition-all hover:translate-y-px hover:shadow-none font-medium bg-pink-300 border border-black pl-7 pr-6 rounded-lg shadow-flat"
-          type="submit"
-          disabled={!password.length || !email.length}
-        >
-          <span>Sign in</span>
-          {loading ? (
-            <Loader className="animate-spin" size={16} />
-          ) : (
+
+          <Button
+            className="btn btn--pink flex items-center space-x-2 justify-center w-full py-3.5"
+            type="submit"
+            loading={loading}
+            disabled={!password.length || !email.length}
+          >
+            <span>Sign in</span>
             <ArrowRight size={16} />
-          )}
-        </button>
-        <div>{errorMessage}</div>
+          </Button>
+        </div>
+        <div className="flex items-end justify-center h-10 text-red-800">
+          {errorMessage}
+        </div>
       </form>
-      {/* <form onSubmit={handleSignIn}>
-        <div className="rounded-lg shadow-sm">
-          <label className="sr-only" htmlFor="email">
-            Your email
-          </label>
-          <div className="relative text-gray-400 focus-within:text-black">
-            <div className="absolute inset-y-0 flex items-center pl-4">
-              <Mail size={16} />
-            </div>
-            <input
-              type="email"
-              id="email"
-              autoFocus={true}
-              required={true}
-              autoComplete="username"
-              className="w-full pr-4 pl-10 py-3.5 focus:outline-none mb-px border-none rounded-none rounded-t-lg"
-              placeholder="Email..."
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <label className="sr-only" htmlFor="password">
-            Your password
-          </label>
-          <div className="relative text-gray-400 focus-within:text-black">
-            <div className="absolute inset-y-0 flex items-center pl-4">
-              <Lock size={16} />
-            </div>
-            <input
-              type="password"
-              id="password"
-              required={true}
-              autoComplete="current-password"
-              className="w-full pr-4 pl-10 py-3.5 focus:outline-none border-none rounded-none rounded-b-lg"
-              placeholder="Password..."
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-        </div>
-        <button
-          className={`flex items-center space-x-2 px-6 w-full justify-center mt-8 py-3.5 font-medium hover:bg-gray-800 focus:bg-black rounded-lg bg-black text-white ${
-            !password.length || !email.length ? ' cursor-not-allowed' : ''
-          }`}
-          type="submit"
-          disabled={!password.length || !email.length}
-        >
-          <span>Sign in</span>
-          {loading ? (
-            <Loader className="animate-spin" size={16} />
-          ) : (
-            <ArrowRight size={16} />
-          )}
-        </button>
-        <div>{errorMessage}</div>
-      </form> */}
     </div>
   );
 }
