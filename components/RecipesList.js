@@ -3,10 +3,18 @@ import Image from 'next/image';
 import { Loader } from 'react-feather';
 
 const RecipesList = ({ loading, recipes }) => {
+  console.log(recipes);
   if (loading) {
     return (
-      <div className="flex items-center justify-center border-2 border-gray-200 border-dashed rounded-lg h-72">
-        <Loader className="animate-spin" size={20} />
+      <div className="flex items-center justify-center rounded-lg h-44">
+        <Loader className="animate-spin" size={24} />
+      </div>
+    );
+  }
+  if (recipes.length === 0) {
+    return (
+      <div className="flex items-center justify-center text-lg border border-black rounded-lg shadow-flat h-72">
+        We could not find any recipes matching your search. Try again!
       </div>
     );
   }
