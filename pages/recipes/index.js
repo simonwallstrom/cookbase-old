@@ -6,8 +6,10 @@ import { Container } from '../../components/Ui';
 
 export default function Recipes() {
   const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchRecipes = async () => {
+    setLoading(true);
     let { data: recipes, error } = await supabase
       .from('recipes')
       .select('id, slug, name, image')
@@ -15,6 +17,7 @@ export default function Recipes() {
       .order('name', { ascending: true });
     if (error) console.log('error', error);
     setRecipes(recipes);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export default function Recipes() {
         buttonURL="/recipes/new"
       />
 
-      <RecipesList recipes={recipes} />
+      <RecipesList loading={loading} recipes={recipes} />
     </Container>
   );
 }

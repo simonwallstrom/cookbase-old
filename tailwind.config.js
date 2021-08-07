@@ -6,9 +6,9 @@ module.exports = {
   mode: 'jit',
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter Var', ...defaultTheme.fontFamily.sans],
-      },
+      // fontFamily: {
+      //   sans: ['Inter Var', ...defaultTheme.fontFamily.sans],
+      // },
       boxShadow: {
         flat: '1px 1px #000',
       },

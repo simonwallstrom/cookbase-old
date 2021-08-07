@@ -1,23 +1,33 @@
 import Link from 'next/link';
-import { Image } from 'react-feather';
+import Image from 'next/image';
+import { Loader } from 'react-feather';
 
-const RecipesList = ({ recipes }) => {
+const RecipesList = ({ loading, recipes }) => {
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center border-2 border-gray-200 border-dashed rounded-lg h-72">
+        <Loader className="animate-spin" size={20} />
+      </div>
+    );
+  }
   return (
     <div className="grid grid-cols-2 gap-6 lg:gap-8 md:grid-cols-3">
       {recipes?.map((recipe) => (
         <Link key={recipe.id} href={`/recipes/${recipe.slug}`}>
-          <a className="hover:opacity-70">
+          <a className="transition-opacity hover:opacity-70">
             {recipe.image ? (
-              <img
-                src={recipe.image}
-                alt={recipe.name}
-                width={400}
-                height={350}
-                className="border border-black rounded-xl shadow-flat"
-              />
+              <div className="overflow-hidden bg-yellow-200 border border-black rounded-lg shadow-flat">
+                <Image
+                  src={recipe.image}
+                  alt={recipe.name}
+                  width={800}
+                  height={500}
+                  layout="responsive"
+                />
+              </div>
             ) : (
-              <div className="flex items-center justify-center w-full h-40 bg-gray-100 rounded-lg">
-                <Image className="text-gray-400" />
+              <div className="flex flex-col items-center justify-center space-y-2 transition-colors border border-black bg-gray-50 shadow-flat rounded-xl h-44 hover:bg-gray-100">
+                Image
               </div>
             )}
 
@@ -32,5 +42,15 @@ const RecipesList = ({ recipes }) => {
     </div>
   );
 };
+
+{
+  /* <img
+                src={recipe.image}
+                alt={recipe.name}
+                width={400}
+                height={350}
+                className="border border-black rounded-xl shadow-flat"
+              /> */
+}
 
 export default RecipesList;

@@ -5,11 +5,11 @@ import useStore from '../lib/store';
 import { useEffect } from 'react';
 
 export default function Nav() {
-  const collections = useStore((state) => state.collections);
-  const getAllCollections = useStore((state) => state.getAllCollections);
+  const categories = useStore((state) => state.categories);
+  const getAllCategories = useStore((state) => state.getAllCategories);
 
   useEffect(() => {
-    getAllCollections();
+    getAllCategories();
   }, []);
 
   return (
@@ -42,17 +42,17 @@ export default function Nav() {
         </NavLink>
       </div>
       <div className="flex items-center justify-between px-10 mt-10 mb-3 font-mono text-sm uppercase">
-        <div>Collections</div>
-        <Link href="/collections">
+        <div>Categories</div>
+        <Link href="/categories">
           <a className="text-xs hover:underline">View all →</a>
         </Link>
       </div>
       <div className="flex flex-col pb-px overflow-y-scroll">
-        {collections?.map((collection) => (
-          <NavLink key={collection.id} href={`/collections/${collection.slug}`}>
+        {categories?.map((category) => (
+          <NavLink key={category.id} href={`/categories/${category.slug}`}>
             <div className="flex items-center space-x-2">
               <Bookmark size={16} />
-              <div className="line-clamp-1">{collection.name}</div>
+              <div className="line-clamp-1">{category.name}</div>
             </div>
           </NavLink>
         ))}

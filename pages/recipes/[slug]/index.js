@@ -27,12 +27,29 @@ const RecipeDetails = () => {
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
 
+  console.log(recipe);
+
   const getRecipe = async (slug) => {
     setLoading(true);
     // await new Promise((res) => setTimeout(res, 1500));
     let { data, error } = await supabase
       .from('recipes')
-      .select('*')
+      .select(
+        `
+        id,
+        slug,
+        name,
+        description,
+        instructions,
+        ingredients,
+        servings,
+        categories(
+          name,
+          id,
+          slug
+        )
+        `
+      )
       .eq('slug', slug)
       .single();
     setRecipe(data);
@@ -74,7 +91,7 @@ const RecipeDetails = () => {
                   </a>
                 </Link>
                 <div className="flex space-x-4">
-                  <Link href={`/recipes/${recipe.slug}/edit`}>
+                  <Link href={`/recipes/${recipe?.slug}/edit`}>
                     <a className="flex items-center p-3 rounded-full btn">
                       <Edit size={20} />
                     </a>
@@ -88,10 +105,12 @@ const RecipeDetails = () => {
                 </div>
               </div>
               <div className="max-w-3xl">
-                <div className="flex items-center space-x-1.5 text-sm font-medium text-white">
-                  <Bookmark size={16} />
-                  <span>Varmrätt</span>
-                </div>
+                <Link href={`/categories/${recipe?.categories?.slug}`}>
+                  <a className="flex items-center space-x-1.5 text-sm font-medium text-white">
+                    <Bookmark size={16} />
+                    <span>{recipe?.categories?.name}</span>
+                  </a>
+                </Link>
                 {loading ? (
                   <div>Loading...</div>
                 ) : (

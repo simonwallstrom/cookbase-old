@@ -8,25 +8,25 @@ import { useIsMounted } from '../lib/useIsMounted';
 import useStore from '../lib/store';
 import { Trash2 } from 'react-feather';
 
-export default function CollectionForm({
+export default function CategoryForm({
   isOpen,
   setIsOpen,
   isEdit,
-  collection,
-  setCollection,
+  category,
+  setCategory,
 }) {
   let inputRef = useRef(null);
   const isMounted = useIsMounted();
   const { user } = useUser();
   const router = useRouter();
-  const [collectionName, setCollectionName] = useState('');
-  const { getAllCollections } = useStore();
+  const [categoryName, setCategoryName] = useState('');
+  const { getAllCategories } = useStore();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    setCollectionName(collection?.name || '');
-  }, [collection]);
+    setCategoryName(category?.name || '');
+  }, [category]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,40 +35,43 @@ export default function CollectionForm({
 
     if (isEdit) {
       const { data, error } = await supabase
-        .from('collections')
-        .update({ name: collectionName })
-        .eq('slug', collection.slug);
+        .from('categories')
+        .update({ name: categoryName })
+        .eq('slug', category.slug);
       if (error) setErrorMessage(error.message);
       if (data) {
         setIsOpen(false);
-        setCollection(data[0]);
-        getAllCollections();
+        setCategory({
+          ...category,
+          name: data[0].name,
+        });
+        getAllCategories();
       }
     } else {
       const { data, error } = await supabase
-        .from('collections')
-        .insert({ name: collectionName, user_id: user.id })
+        .from('categories')
+        .insert({ name: categoryName, user_id: user.id })
         .single();
       if (error) setErrorMessage(error.message);
       if (data) {
         setIsOpen(false);
-        getAllCollections();
+        getAllCategories();
       }
     }
 
     setLoading(false);
   };
 
-  const deleteCollection = async () => {
+  const deleteCategory = async () => {
     const { data, error } = await supabase
-      .from('collections')
+      .from('categories')
       .delete()
-      .eq('slug', collection.slug);
+      .eq('slug', category.slug);
     if (error) setErrorMessage(error.message);
     if (data) {
       setIsOpen(false);
-      getAllCollections();
-      router.replace('/collections/');
+      getAllCategories();
+      router.replace('/categories/');
     }
   };
 
@@ -85,27 +88,23 @@ export default function CollectionForm({
           <Dialog.Overlay className="fixed inset-0" />
           <div className="relative w-full max-w-lg bg-white border border-black shadow-flat rounded-xl lg:px-12 lg:py-10">
             <Dialog.Title className="text-2xl font-bold">
-              {isEdit ? (
-                <span>Edit Collection</span>
-              ) : (
-                <span>New collection</span>
-              )}
+              {isEdit ? <span>Edit category</span> : <span>New category</span>}
             </Dialog.Title>
             <Dialog.Description className="text-gray-600">
-              Group recipes together with a collection.
+              Group recipes together with a category.
             </Dialog.Description>
 
             <form onSubmit={handleSubmit}>
               <div className="mt-6">
-                <label htmlFor="collectionName">Collection name</label>
+                <label htmlFor="categoryName">category name</label>
                 <input
                   type="text"
-                  id="collectionName"
+                  id="categoryName"
                   ref={inputRef}
                   placeholder="Midweek dinners..."
-                  value={collectionName}
+                  value={categoryName}
                   disabled={loading}
-                  onChange={(e) => setCollectionName(e.target.value)}
+                  onChange={(e) => setCategoryName(e.target.value)}
                 />
               </div>
 
@@ -121,9 +120,9 @@ export default function CollectionForm({
                   type="submit"
                 >
                   {isEdit ? (
-                    <span>Update Collection</span>
+                    <span>Update category</span>
                   ) : (
-                    <span>Create collection</span>
+                    <span>Create category</span>
                   )}
                 </Button>
                 <button className="btn" onClick={() => setIsOpen(false)}>
@@ -131,7 +130,7 @@ export default function CollectionForm({
                 </button>
                 <button
                   className="ml-auto bg-red-300 btn"
-                  onClick={deleteCollection}
+                  onClick={deleteCategory}
                 >
                   <Trash2 size={16} />
                 </button>
