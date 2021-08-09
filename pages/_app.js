@@ -10,7 +10,6 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Cookbase · The opionated recipe manager</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <UserContextProvider>
         <Layout type={layout}>

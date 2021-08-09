@@ -29,27 +29,29 @@ export default function Search() {
   return (
     <Container>
       <div className="py-6 md:py-8">
-        <div className="flex items-center justify-between">
+        <div className="items-center justify-between md:flex">
           <div className="flex">
             <h1 className="text-3xl font-black leading-normal">Search</h1>
           </div>
           <form onSubmit={searchRecipe}>
-            <div className="flex space-x-4">
+            <div className="flex">
               <input
-                className="w-72"
+                className="rounded-r-none md:w-72"
                 placeholder="Lasagna..."
                 value={search}
                 autoFocus={true}
                 type="text"
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <Button className="btn btn--pink">Search</Button>
+              <Button className="-ml-px rounded-l-none btn btn--black">
+                Search
+              </Button>
             </div>
           </form>
         </div>
       </div>
       {emptyState ? (
-        <div className="flex items-center justify-center text-lg border border-black rounded-lg shadow-flat h-72">
+        <div className="flex items-center justify-center border-2 border-gray-200 border-dashed rounded-lg h-72">
           Time to cook your favorite recipe? Search above ☝️
         </div>
       ) : (

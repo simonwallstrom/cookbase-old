@@ -81,9 +81,9 @@ const RecipeDetails = () => {
           src="https://images.pexels.com/photos/4676441/pexels-photo-4676441.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           className="absolute object-cover w-full h-full"
         />
-        <div className="relative flex bg-black bg-opacity-60 h-96">
+        <div className="relative flex bg-black bg-opacity-60 h-72 md:h-96">
           <Container>
-            <div className="flex flex-col justify-between h-full pt-8 pb-10">
+            <div className="flex flex-col justify-between h-full py-6 md:pt-8 md:pb-10">
               <div className="flex items-center justify-between">
                 <Link href="/recipes">
                   <a className="flex items-center p-3 rounded-full btn btn--yellow">
@@ -114,7 +114,7 @@ const RecipeDetails = () => {
                 {loading ? (
                   <div>Loading...</div>
                 ) : (
-                  <h1 className="my-2 text-4xl font-extrabold leading-tight text-white line-clamp-2">
+                  <h1 className="my-2 text-2xl font-extrabold leading-tight text-white md:text-4xl line-clamp-2">
                     {recipe?.name}
                   </h1>
                 )}
@@ -132,8 +132,8 @@ const RecipeDetails = () => {
       </div>
       <div className="flex flex-1">
         <Container>
-          <div className="flex flex-col flex-1 w-full gap-12 md:flex-row">
-            <div className="pt-10 pb-24 border-black md:border-r md:pr-12 md:w-1/3">
+          <div className="flex flex-col flex-1 w-full md:gap-12 md:flex-row">
+            <div className="py-6 md:pb-24 md:pt-10 md:border-r md:pr-12 md:w-1/3">
               <div className="flex flex-wrap items-baseline mb-4 lg:justify-between">
                 <h2 className="mr-2 text-2xl font-bold">Ingredients</h2>
                 <div className="text-sm font-medium text-gray-500">
@@ -155,7 +155,7 @@ const RecipeDetails = () => {
                 <div>Loading...</div>
               )}
             </div>
-            <div className="pt-10 pb-24 md:w-2/3">
+            <div className="pt-4 pb-10 md:pb-24 md:pt-10 md:w-2/3">
               <h2 className="mb-4 text-2xl font-bold">Instructions</h2>
               {!loading ? (
                 <div>

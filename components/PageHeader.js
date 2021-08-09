@@ -5,18 +5,20 @@ const PageHeader = ({ title, buttonText, buttonURL, handleClick }) => {
     <div className="py-6 md:py-8">
       <div className="flex items-center justify-between">
         <div className="flex">
-          <h1 className="text-3xl font-black leading-normal">{title}</h1>
+          <h1 className="text-2xl font-extrabold leading-normal md:text-3xl">
+            {title}
+          </h1>
         </div>
         {buttonURL ? (
           <div>
             <Link href={buttonURL}>
-              <a className="btn btn--pink">{buttonText}</a>
+              <a className="btn btn--black">{buttonText}</a>
             </Link>
           </div>
         ) : null}
         {handleClick ? (
           <div>
-            <button className="btn btn--pink" onClick={handleClick}>
+            <button className="btn btn--black" onClick={handleClick}>
               {buttonText}
             </button>
           </div>

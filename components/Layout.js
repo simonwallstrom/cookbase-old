@@ -3,7 +3,7 @@ import MobileNav from './MobileNav';
 
 const SiteLayout = ({ children }) => {
   return (
-    <main className="flex items-center justify-center min-h-screen py-8 bg-gradient-radial from-yellow-200 to-yellow-300">
+    <main className="flex items-center justify-center flex-1 p-6 bg-yellow-300">
       <div className="w-full max-w-xl text-center">{children}</div>
     </main>
   );
@@ -11,10 +11,10 @@ const SiteLayout = ({ children }) => {
 
 const AppLayout = ({ children }) => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex">
       <Nav />
       <MobileNav />
-      <main className="flex flex-col flex-1">{children}</main>
+      <main className="flex flex-col flex-1 pb-[69px] lg:pb-0">{children}</main>
     </div>
   );
 };

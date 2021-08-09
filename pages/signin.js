@@ -64,7 +64,7 @@ export default function Signin() {
               autoFocus={true}
               required={true}
               autoComplete="username"
-              className="pr-4 text-black pl-10 py-3.5"
+              className="pr-4 text-black bg-white focus:border-white border-white shadow pl-10 py-3.5"
               placeholder="Email..."
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -82,7 +82,7 @@ export default function Signin() {
               id="password"
               required={true}
               autoComplete="current-password"
-              className="pr-4 text-black pl-10 py-3.5"
+              className="pr-4 text-black bg-white focus:border-white border-white shadow pl-10 py-3.5"
               placeholder="Password..."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -90,7 +90,7 @@ export default function Signin() {
           </div>
 
           <Button
-            className="btn btn--pink flex items-center space-x-2 justify-center w-full py-3.5"
+            className="btn btn--black shadow flex items-center space-x-2 justify-center w-full py-3.5"
             type="submit"
             loading={loading}
             disabled={!password.length || !email.length}

@@ -1,33 +1,41 @@
 import Link from 'next/link';
 import { Grid, Hash, Search, Settings } from 'react-feather';
+import { useRouter } from 'next/router';
+
+function MobileNavLink({ children, href }) {
+  const router = useRouter();
+  const classNames = router.asPath === href ? 'bg-yellow-300' : '';
+
+  return (
+    <Link href={href}>
+      <a
+        className={`flex flex-col py-3.5 items-center flex-1 space-y-1 ${classNames}`}
+      >
+        {children}
+      </a>
+    </Link>
+  );
+}
 
 export default function MobileNav() {
   return (
-    <div className="fixed bottom-0 text-gray-500 flex justify-between w-full px-6 py-3.5 text-sm font-medium bg-white border-t lg:hidden">
-      <Link href="/">
-        <div className="flex flex-col items-center space-y-1 text-black">
-          <Grid size={16} />
-          <a className="hover:opacity-70">Recipes</a>
-        </div>
-      </Link>
-      <Link href="/">
-        <div className="flex flex-col items-center space-y-1">
-          <Hash size={16} />
-          <a className="hover:opacity-70">Categories</a>
-        </div>
-      </Link>
-      <Link href="/">
-        <div className="flex flex-col items-center space-y-1">
-          <Search size={16} />
-          <a className="hover:opacity-70">Search</a>
-        </div>
-      </Link>
-      <Link href="/">
-        <div className="flex flex-col items-center space-y-1">
-          <Settings size={16} />
-          <a className="hover:opacity-70">Account</a>
-        </div>
-      </Link>
+    <div className="fixed bottom-0 z-50 flex w-full text-xs font-medium bg-gray-100 lg:hidden">
+      <MobileNavLink href="/recipes">
+        <Grid size={16} />
+        <div>Recipes</div>
+      </MobileNavLink>
+      <MobileNavLink href="/categories">
+        <Hash size={16} />
+        <div>Categories</div>
+      </MobileNavLink>
+      <MobileNavLink href="/search">
+        <Search size={16} />
+        <div>Search</div>
+      </MobileNavLink>
+      <MobileNavLink href="/account">
+        <Settings size={16} />
+        <div>Account</div>
+      </MobileNavLink>
     </div>
   );
 }

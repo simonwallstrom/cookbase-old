@@ -13,7 +13,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <nav className="sticky top-0 flex-col hidden h-screen bg-gray-100 border-r border-black lg:flex w-72">
+    <nav className="sticky top-0 flex-col hidden h-screen bg-gray-100 lg:flex w-72">
       <div className="flex items-center justify-between p-10 pb-9">
         <Link href="/recipes">
           <a>

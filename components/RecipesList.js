@@ -11,9 +11,9 @@ const RecipesList = ({ loading, recipes }) => {
       </div>
     );
   }
-  if (recipes.length === 0) {
+  if (recipes?.length === 0) {
     return (
-      <div className="flex items-center justify-center text-lg border border-black rounded-lg shadow-flat h-72">
+      <div className="flex items-center justify-center border-2 border-gray-200 border-dashed rounded-lg h-72">
         We could not find any recipes matching your search. Try again!
       </div>
     );
@@ -24,7 +24,7 @@ const RecipesList = ({ loading, recipes }) => {
         <Link key={recipe.id} href={`/recipes/${recipe.slug}`}>
           <a className="transition-opacity hover:opacity-70">
             {recipe.image ? (
-              <div className="overflow-hidden bg-yellow-200 border border-black rounded-lg shadow-flat">
+              <div className="overflow-hidden bg-yellow-200 rounded-lg">
                 <Image
                   src={recipe.image}
                   alt={recipe.name}
@@ -34,7 +34,7 @@ const RecipesList = ({ loading, recipes }) => {
                 />
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center space-y-2 transition-colors border border-black bg-gray-50 shadow-flat rounded-xl h-44 hover:bg-gray-100">
+              <div className="flex flex-col items-center justify-center space-y-2 transition-colors border border-black bg-gray-50 rounded-xl h-44 hover:bg-gray-100">
                 Image
               </div>
             )}
@@ -50,15 +50,5 @@ const RecipesList = ({ loading, recipes }) => {
     </div>
   );
 };
-
-{
-  /* <img
-                src={recipe.image}
-                alt={recipe.name}
-                width={400}
-                height={350}
-                className="border border-black rounded-xl shadow-flat"
-              /> */
-}
 
 export default RecipesList;

@@ -86,7 +86,7 @@ export default function CategoryForm({
           onClose={() => setIsOpen(false)}
         >
           <Dialog.Overlay className="fixed inset-0" />
-          <div className="relative w-full max-w-lg bg-white border border-black shadow-flat rounded-xl lg:px-12 lg:py-10">
+          <div className="relative w-full max-w-lg bg-white rounded-xl lg:px-12 lg:py-10">
             <Dialog.Title className="text-2xl font-bold">
               {isEdit ? <span>Edit category</span> : <span>New category</span>}
             </Dialog.Title>
@@ -96,7 +96,7 @@ export default function CategoryForm({
 
             <form onSubmit={handleSubmit}>
               <div className="mt-6">
-                <label htmlFor="categoryName">category name</label>
+                <label htmlFor="categoryName">Category name</label>
                 <input
                   type="text"
                   id="categoryName"
@@ -115,7 +115,7 @@ export default function CategoryForm({
               ) : null}
               <div className="flex mt-10">
                 <Button
-                  className="mr-6 btn btn--pink"
+                  className="mr-6 btn btn--black"
                   loading={loading}
                   type="submit"
                 >
@@ -129,7 +129,7 @@ export default function CategoryForm({
                   Cancel
                 </button>
                 <button
-                  className="ml-auto bg-red-300 btn"
+                  className="ml-auto text-red-700 btn"
                   onClick={deleteCategory}
                 >
                   <Trash2 size={16} />

@@ -17,10 +17,10 @@ export default function Categories() {
         buttonText="New category"
         handleClick={() => setIsOpen(true)}
       />
-      <div className="grid grid-cols-2 gap-6 lg:gap-8 md:grid-cols-3">
+      <div className="space-y-4">
         {categories?.map((category) => (
           <Link key={category.id} href={`/categories/${category.slug}`}>
-            <a className="flex flex-col items-center justify-center p-6 space-y-2 transition-colors border border-black bg-gray-50 shadow-flat rounded-xl h-44 hover:bg-gray-100">
+            <a className="flex items-center px-6 py-5 space-x-4 transition-colors bg-gray-100 rounded-lg hover:bg-gray-200">
               <h2 className="font-medium">{category.name}</h2>
               <div className="text-gray-600">
                 {category.count > 0 ? category.count : 0} recipes
