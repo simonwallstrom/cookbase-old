@@ -1,0 +1,10 @@
+{
+  "short_name": "Cookbase",
+  "name": "Cookbase",
+  "description": "The simple way to collect and organize your favourite recipes",
+  "icons": [],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

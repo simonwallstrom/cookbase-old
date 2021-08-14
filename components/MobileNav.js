@@ -9,7 +9,7 @@ function MobileNavLink({ children, href }) {
   return (
     <Link href={href}>
       <a
-        className={`flex flex-col py-3.5 items-center flex-1 space-y-1 ${classNames}`}
+        className={`flex -mt-px flex-col py-3.5 items-center flex-1 space-y-1 ${classNames}`}
       >
         {children}
       </a>
@@ -19,7 +19,7 @@ function MobileNavLink({ children, href }) {
 
 export default function MobileNav() {
   return (
-    <div className="fixed bottom-0 z-50 flex w-full text-xs font-medium bg-gray-100 lg:hidden">
+    <div className="fixed bottom-0 z-50 flex w-full text-xs font-medium bg-white border-t backdrop-blur-md backdrop-filter bg-opacity-90 lg:hidden">
       <MobileNavLink href="/recipes">
         <Grid size={16} />
         <div>Recipes</div>

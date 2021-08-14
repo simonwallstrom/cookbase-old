@@ -55,7 +55,7 @@ export default function CategoryDetails() {
       />
       <PageHeader
         title={category?.name}
-        buttonText="Edit category"
+        buttonText="Edit"
         handleClick={() => setIsOpen(true)}
       />
       <RecipesList loading={loading} recipes={category?.recipes} />

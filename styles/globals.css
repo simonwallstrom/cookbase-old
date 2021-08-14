@@ -5,6 +5,7 @@
 @import url('https://rsms.me/inter/inter.css');
 html {
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -16,9 +17,12 @@ body,
   flex-direction: column;
 }
 
-/* body {
-  font-size: 0.9375rem;
-} */
+@media all and (display-mode: standalone) {
+  html {
+    -webkit-text-size-adjust: none;
+    touch-action: pan-y; /*prevent user scaling*/
+  }
+}
 
 @layer base {
   label {
@@ -47,7 +51,7 @@ body,
 
 @layer components {
   .btn {
-    @apply block px-2.5 py-1 font-medium bg-gray-200 border border-transparent rounded-md md:px-4 md:py-2 transition-colors;
+    @apply block px-3 py-1.5 font-medium bg-gray-200 border border-transparent rounded-md md:px-4 md:py-2 transition-colors;
     @apply hover:bg-gray-300;
     @apply focus:bg-gray-200;
   }
@@ -59,16 +63,6 @@ body,
   .btn--yellow {
     @apply bg-yellow-300;
     @apply focus:bg-yellow-400;
-  }
-}
-
-@layer utilities {
-  .text-gradient {
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .text-stroke {
-    -webkit-text-stroke: 0.5px black;
   }
 }
 

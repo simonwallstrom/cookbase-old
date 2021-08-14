@@ -29,7 +29,7 @@ export default function Search() {
   return (
     <Container>
       <div className="py-6 md:py-8">
-        <div className="items-center justify-between md:flex">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex">
             <h1 className="text-3xl font-black leading-normal">Search</h1>
           </div>
@@ -51,7 +51,7 @@ export default function Search() {
         </div>
       </div>
       {emptyState ? (
-        <div className="flex items-center justify-center border-2 border-gray-200 border-dashed rounded-lg h-72">
+        <div className="flex items-center justify-center px-6 py-12 text-center border-2 border-gray-200 border-dashed rounded-lg md:py-24">
           Time to cook your favorite recipe? Search above ☝️
         </div>
       ) : (

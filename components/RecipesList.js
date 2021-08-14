@@ -13,13 +13,13 @@ const RecipesList = ({ loading, recipes }) => {
   }
   if (recipes?.length === 0) {
     return (
-      <div className="flex items-center justify-center border-2 border-gray-200 border-dashed rounded-lg h-72">
-        We could not find any recipes matching your search. Try again!
+      <div className="flex items-center justify-center px-6 py-12 text-center border-2 border-gray-200 border-dashed rounded-lg md:py-24">
+        No recipes to show
       </div>
     );
   }
   return (
-    <div className="grid grid-cols-2 gap-6 lg:gap-8 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8 md:grid-cols-3">
       {recipes?.map((recipe) => (
         <Link key={recipe.id} href={`/recipes/${recipe.slug}`}>
           <a className="transition-opacity hover:opacity-70">

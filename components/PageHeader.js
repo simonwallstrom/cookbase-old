@@ -5,9 +5,7 @@ const PageHeader = ({ title, buttonText, buttonURL, handleClick }) => {
     <div className="py-6 md:py-8">
       <div className="flex items-center justify-between">
         <div className="flex">
-          <h1 className="text-2xl font-extrabold leading-normal md:text-3xl">
-            {title}
-          </h1>
+          <h1 className="text-3xl font-extrabold leading-normal">{title}</h1>
         </div>
         {buttonURL ? (
           <div>

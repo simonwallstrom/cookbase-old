@@ -4,7 +4,7 @@ import PageHeader from '../../components/PageHeader';
 
 export default function New() {
   return (
-    <Container className="mb-24">
+    <Container>
       <PageHeader title="New recipe" />
       <RecipeForm />
     </Container>
