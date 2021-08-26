@@ -5,9 +5,9 @@ import { ArrowRight, Lock, Mail } from 'react-feather';
 import Button from '../components/Button';
 import { useUser } from '../lib/useUser';
 
-Signin.Layout = 'site';
+Login.Layout = 'site';
 
-export default function Signin() {
+export default function Login() {
   const { user, signIn } = useUser();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -15,7 +15,7 @@ export default function Signin() {
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleSignIn = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     await new Promise((res) => setTimeout(res, 1500));
@@ -35,8 +35,8 @@ export default function Signin() {
     const currentHour = new Date().getHours();
     if (currentHour >= 4 && currentHour < 10) return 'Time for breakfast?';
     else if (currentHour >= 10 && currentHour <= 13) return 'Time for lunch?';
-    else if (currentHour > 13 || currentHour < 20) return 'Time for dinner?';
-    else return 'Welcome back';
+    else if (currentHour > 13 && currentHour < 20) return 'Time for dinner?';
+    else return 'Welcome back!';
   };
 
   return (
@@ -47,9 +47,9 @@ export default function Signin() {
         </a>
       </Link>
       <h2 className="mt-10 mb-6 text-lg">
-        {greetingMessage()} Sign in to get started
+        {greetingMessage()} Login to get started
       </h2>
-      <form onSubmit={handleSignIn}>
+      <form onSubmit={handleLogin}>
         <div className="space-y-4">
           <label className="sr-only" htmlFor="email">
             Your email
@@ -95,7 +95,7 @@ export default function Signin() {
             loading={loading}
             disabled={!password.length || !email.length}
           >
-            <span>Sign in</span>
+            <span>Login</span>
             <ArrowRight size={16} />
           </Button>
         </div>

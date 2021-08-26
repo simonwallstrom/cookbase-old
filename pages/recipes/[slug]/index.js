@@ -1,6 +1,12 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { ArrowLeft, Bookmark, MoreHorizontal, Edit } from 'react-feather';
+import {
+  ArrowLeft,
+  Bookmark,
+  MoreHorizontal,
+  Edit,
+  Trash2,
+} from 'react-feather';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Container } from '../../../components/Ui';
@@ -83,7 +89,7 @@ const RecipeDetails = () => {
         />
         <div className="relative flex bg-black bg-opacity-60 h-72 md:h-96">
           <Container>
-            <div className="flex flex-col justify-between h-full py-6 md:pt-8 md:pb-10">
+            <div className="flex flex-col justify-between h-full pt-6 md:pt-8 md:pb-10">
               <div className="flex items-center justify-between">
                 <Link href="/recipes">
                   <a className="flex items-center p-3 rounded-full btn btn--yellow">
@@ -100,7 +106,7 @@ const RecipeDetails = () => {
                     onClick={deleteRecipe}
                     className="flex items-center p-3 rounded-full btn"
                   >
-                    <MoreHorizontal size={20} />
+                    <Trash2 size={20} />
                   </button>
                 </div>
               </div>
@@ -155,7 +161,7 @@ const RecipeDetails = () => {
                 <div>Loading...</div>
               )}
             </div>
-            <div className="pt-4 pb-10 md:pb-24 md:pt-10 md:w-2/3">
+            <div className="pt-4 md:pb-24 md:pt-10 md:w-2/3">
               <h2 className="mb-4 text-2xl font-bold">Instructions</h2>
               {!loading ? (
                 <div>
