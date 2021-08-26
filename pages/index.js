@@ -26,7 +26,7 @@ export default function Home() {
             </a>
           </Link>
         ) : (
-          <Link href="/signin">
+          <Link href="/login">
             <a className="btn btn--black flex items-center space-x-2 justify-center px-7 py-3.5">
               <span>Login to get started</span>
               <ArrowRight size={16} />
@@ -34,9 +34,16 @@ export default function Home() {
           </Link>
         )}
       </div>
-      <div className="mt-6 text-sm opacity-70">
-        We are currently in closed beta
-      </div>
+      {!user ? (
+        <div className="mt-6 text-sm">
+          <span className="opacity-70">Don't have an account yet?</span>{' '}
+          <Link href="/signup">
+            <a className="border-b border-black border-dashed opacity-100 hover:border-solid">
+              Sign up
+            </a>
+          </Link>
+        </div>
+      ) : null}
     </>
   );
 }

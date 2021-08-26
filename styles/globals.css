@@ -20,7 +20,7 @@ body,
 @media all and (display-mode: standalone) {
   html {
     -webkit-text-size-adjust: none;
-    touch-action: pan-y; /*prevent user scaling*/
+    touch-action: pan-y;
   }
 }
 
