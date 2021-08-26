@@ -9,7 +9,7 @@ function MobileNavLink({ children, href }) {
   return (
     <Link href={href}>
       <a
-        className={`flex -mt-px flex-col py-3.5 items-center flex-1 space-y-1 ${classNames}`}
+        className={`flex -mt-px flex-col py-3.5 standalone:pb-7 items-center flex-1 space-y-1 ${classNames}`}
       >
         {children}
       </a>

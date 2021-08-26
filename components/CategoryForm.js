@@ -86,7 +86,7 @@ export default function CategoryForm({
           onClose={() => setIsOpen(false)}
         >
           <Dialog.Overlay className="fixed inset-0" />
-          <div className="relative w-full max-w-lg bg-white rounded-xl lg:px-12 lg:py-10">
+          <div className="relative w-full max-w-lg p-6 mx-6 bg-white rounded-xl lg:px-12 lg:py-10">
             <Dialog.Title className="text-2xl font-bold">
               {isEdit ? <span>Edit category</span> : <span>New category</span>}
             </Dialog.Title>
@@ -95,7 +95,7 @@ export default function CategoryForm({
             </Dialog.Description>
 
             <form onSubmit={handleSubmit}>
-              <div className="mt-6">
+              <div className="mt-4 lg:mt-6">
                 <label htmlFor="categoryName">Category name</label>
                 <input
                   type="text"
@@ -113,9 +113,9 @@ export default function CategoryForm({
                   {errorMessage}
                 </div>
               ) : null}
-              <div className="flex mt-10">
+              <div className="flex flex-wrap gap-4 mt-6 lg:mt-10">
                 <Button
-                  className="mr-6 btn btn--black"
+                  className="w-full md:w-auto btn btn--black"
                   loading={loading}
                   type="submit"
                 >
@@ -125,15 +125,20 @@ export default function CategoryForm({
                     <span>Create category</span>
                   )}
                 </Button>
-                <button className="btn" onClick={() => setIsOpen(false)}>
+                <button
+                  className="w-full btn md:w-auto"
+                  onClick={() => setIsOpen(false)}
+                >
                   Cancel
                 </button>
-                <button
-                  className="ml-auto text-red-700 btn"
-                  onClick={deleteCategory}
-                >
-                  <Trash2 size={16} />
-                </button>
+                {isEdit ? (
+                  <button
+                    className="w-full ml-auto text-red-700 btn md:w-auto"
+                    onClick={deleteCategory}
+                  >
+                    Delete
+                  </button>
+                ) : null}
               </div>
             </form>
           </div>

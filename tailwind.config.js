@@ -1,16 +1,11 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   mode: 'jit',
   theme: {
     extend: {
-      // fontFamily: {
-      //   sans: ['Inter Var', ...defaultTheme.fontFamily.sans],
-      // },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      screens: {
+        standalone: { raw: '(display-mode: standalone)' },
       },
     },
   },

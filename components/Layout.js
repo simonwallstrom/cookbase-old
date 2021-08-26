@@ -7,8 +7,16 @@ import { useEffect } from 'react';
 const SiteLayout = ({ children }) => {
   return (
     <main className="flex items-center justify-center flex-1 p-6 bg-yellow-300">
-      <img className="absolute top-0 left-0 w-1/4 max-w-[250px]" src="/fish-bg.svg" alt="" />
-      <img className="absolute bottom-0 right-0 w-1/3 max-w-[350px]" src="/pizza-bg.svg" alt="" />
+      <img
+        className="absolute top-0 left-0 w-1/4 max-w-[250px]"
+        src="/fish-bg.svg"
+        alt=""
+      />
+      <img
+        className="absolute bottom-0 right-0 w-1/3 max-w-[350px]"
+        src="/pizza-bg.svg"
+        alt=""
+      />
       <div className="w-full max-w-xl text-center">{children}</div>
     </main>
   );
@@ -28,7 +36,9 @@ const AppLayout = ({ children }) => {
     <div className="flex">
       <Nav />
       <MobileNav />
-      <main className="flex flex-col flex-1 pb-[69px] lg:pb-0">{children}</main>
+      <main className="flex flex-col flex-1 pb-[69px] standalone:pb-[78px] lg:pb-0">
+        {children}
+      </main>
     </div>
   );
 };
