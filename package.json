@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.0",
+    "@headlessui/react": "^1.4.3",
     "@supabase/supabase-js": "^1.22.3",
     "@tailwindcss/line-clamp": "^0.2.1",
     "next": "^11.1.0",
